@@ -1,3 +1,0 @@
-F74052170_quiz7_prob1
-F74052170_quiz7_prob2
-F74052170_quiz7_prob3

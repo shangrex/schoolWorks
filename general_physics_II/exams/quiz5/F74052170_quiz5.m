@@ -1,2 +1,0 @@
-F74052170_quiz5_prob1
-F74052170_quiz5_prob2
