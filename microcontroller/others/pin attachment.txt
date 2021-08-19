@@ -1,4 +1,0 @@
-red -> power
-black-> ground
-white -> pin25
-green -> pin26
