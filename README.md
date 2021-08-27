@@ -1,17 +1,46 @@
-# SchoolWorks
+# SchoolWorks-backend
 
-Repository of NCKU CSIE class slides,exams, and homeworks
-
-放著NCKU CSIE 講義,考古題,作業的repository
-
-## Introduction
-
-主要是NCKU CSIE 的考古題,講義等等
+Repository of NCKU CSIE slides,exams, and homeworks
 
 未來可能新增不同系所的東西
 
-## File structure
+## Development
 
-請參考EXAMPLE這個資料夾的格式
+### Prerequisitive
 
-如果有考古題可以fork過去做Pull request,也可以寄信給`reastw1234@gmail.com`
+| Name | Version |
+| --- | --- |
+| Python | 3.8 |
+| pipenv(Python module) | 2018.11.26 or up |
+
+### Environment setup
+
+0. Initialize environment variable
+
+```
+cp sample.env .env
+```
+
+1. Initialize Python environment
+
+```
+make init
+```
+
+2. Enter the environment and start developing
+
+```
+pipenv shell
+```
+
+3. Start development API service
+
+```
+cd api/
+uvicorn app:APP
+```
+The server will run at http://127.0.0.1:8000
+
+## Contribution
+
+Read the `Contributing.md`
