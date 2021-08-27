@@ -2,8 +2,6 @@
 
 Repository of NCKU CSIE slides,exams, and homeworks
 
-未來可能新增不同系所的東西
-
 ## Development
 
 ### Prerequisitive

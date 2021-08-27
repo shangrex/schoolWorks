@@ -20,6 +20,7 @@ uvicorn = {extras = ["standard"], version = "==0.12.2"}
 fastapi = "==0.68.0"
 requests = "==2.26.0"
 aiofiles = "==0.7.0"
+lxml = "==4.6.3"
 
 [requires]
 python_version = "3.8"
