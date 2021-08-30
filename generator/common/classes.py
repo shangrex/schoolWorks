@@ -8,6 +8,7 @@ class CourseInfo():
     class_code: str
     year: str
     semester: str
+    course_name: str = None
     department: str = None
     instructor: str = None
     serial_number: str = None # act as registeration code
@@ -23,6 +24,7 @@ class CourseInfo():
 
     def dump_index(self):
         return {
+            "course_name": self.course_name,
             "course_id": self.course_id,
             "class_code": self.class_code,
             "year": self.year,

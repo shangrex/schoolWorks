@@ -24,14 +24,17 @@ def crawl_course(metadata: CourseInfo) -> CourseInfo:
         }
     ).text.encode("ISO-8859-1").decode("utf-8")
     html: etree._Element = etree.HTML(text)
-    sidebar: etree._Element = html.xpath('//*[@id="sidebar"]/div')[0]
 
-    # remove unused br and strip whitespace head
-    children: List[etree._Element] = sidebar.getchildren()
-    filtered = list(filter(lambda child: child.tag == "span", children))
+    title: etree._Element = html.xpath('//*[@id="header"]/h1/div/span')[1]
+    filtered = list(filter(lambda child: child.tag == "br", title.getchildren()))
+    course_names = list(map(lambda child: child.tail.strip(), filtered))
+
+    sidebar: etree._Element = html.xpath('//*[@id="sidebar"]/div')[0]
+    filtered = list(filter(lambda child: child.tag == "span", sidebar.getchildren()))
     information = list(map(lambda child: child.tail.strip(), filtered))
 
     return CourseInfo(**{
+        "course_name": f"{course_names[0]} {course_names[1]}",
         "department": information[0],
         "instructor": information[1],
         "year": metadata.year,

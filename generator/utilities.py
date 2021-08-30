@@ -40,7 +40,7 @@ def generate_data(path: str, course: CourseInfo):
         course (CourseInfo): course info to be dumped
     """
     with open(
-        f"{path}/{course.course_id}/{course.year}_{course.semester}/{course.class_code}/data.json",
+        f"{path}/{course.course_id}/{course.year}_{course.semester}/{course.class_code}.json",
         "w+"
     ) as fp:
         json.dump(course.dump_data(), fp, ensure_ascii=False)
