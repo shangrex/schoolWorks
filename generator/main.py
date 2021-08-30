@@ -17,8 +17,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     courses = []
     for metadatum in get_metadata(args.path):
-        if courses:
-            break
         try:
             courses.append(crawl_course(metadatum))
         except Exception as warning:

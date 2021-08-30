@@ -20,7 +20,10 @@ def get_metadata(asset: str) -> List[CourseInfo]:
         if "unknown" in semesters:
             semesters.remove("unknown")
         for semester in semesters:
-            class_codes = os.listdir(f"{asset}/{course_id}/{semester}")
+            # remove json data
+            class_codes =  list(
+                filter(lambda class_code: ".json" not in class_code, os.listdir(f"{asset}/{course_id}/{semester}"))
+            )
             for class_code in class_codes:
                 courses.append(CourseInfo(**{
                     "course_id": course_id,
