@@ -1,41 +1,26 @@
-from dataclasses import dataclass
+from loguru import logger
 from typing import List
+
 import requests
-from os import listdir
 from lxml import etree
 
-
-@dataclass
-class CourseInfo():
-    department: str
-    instructor: str
-    year: str
-    semester: str
-    serial_number: str # act as registeration code
-    attribute_code: str
-    system_number: str
-    class_code: str
-    credit: str
-    language: str
+from common.classes import CourseInfo
 
 
-def crawl_course(course_id: str, year: str, semester: str, class_code: str = None) -> CourseInfo:
+def crawl_course(metadata: CourseInfo) -> CourseInfo:
     """Crawl NCKU course website for infomation
 
     Args:
-        course_id (str): Course ID
-        year (str): Course year
-        semester (str): Course semester
-        class_code (str): Class code, default to None
+        metadata(str): Course's metadata from directory structure
     """
     # Need to re-decode with utf-8, original is encoded with ISO-8859-1
     text: str = requests.get(
         "http://class-qry.acad.ncku.edu.tw/syllabus/online_display.php",
         params={
-            "syear": year,
-            "sem": semester,
-            "co_no": course_id,
-            "class_code": class_code
+            "syear": metadata.year.zfill(4),
+            "sem": metadata.semester,
+            "co_no": metadata.course_id,
+            "class_code": metadata.class_code if metadata.class_code != "0" else None
         }
     ).text.encode("ISO-8859-1").decode("utf-8")
     html: etree._Element = etree.HTML(text)
@@ -46,6 +31,16 @@ def crawl_course(course_id: str, year: str, semester: str, class_code: str = Non
     filtered = list(filter(lambda child: child.tag == "span", children))
     information = list(map(lambda child: child.tail.strip(), filtered))
 
-    return CourseInfo(*information)
-
-crawl_course("F715910", "0110", "1")
+    return CourseInfo(**{
+        "department": information[0],
+        "instructor": information[1],
+        "year": metadata.year,
+        "semester": metadata.semester,
+        "serial_number": information[4],
+        "attribute_code": information[5],
+        "course_id": metadata.course_id,
+        "class_code": metadata.class_code,
+        "credit": information[8],
+        "language": information[9],
+        "files": metadata.files,
+    })

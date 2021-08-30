@@ -39,6 +39,13 @@ uvicorn app:APP
 ```
 The server will run at http://127.0.0.1:8000
 
+## Generating files
+
+Generate index.json and data.json
+```
+python3 generator/main.py  -P $PWD/api/static
+```
+
 ## Contribution
 
 Read the `Contributing.md`
