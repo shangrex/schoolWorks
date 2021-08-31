@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  schoolworks:
+    container_name: schoolworks
+    build: .
+    image: schoolworks:latest
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 8000:8000

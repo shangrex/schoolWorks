@@ -1,11 +1,10 @@
 from config import Config
 from endpoints import RESOURCES
-from loguru import logger
-
 from fastapi import APIRouter, Depends, FastAPI
 from fastapi.requests import Request
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import Response
+from fastapi.staticfiles import StaticFiles
+from loguru import logger
 
 APP = FastAPI(
     version=Config.VERSION,
